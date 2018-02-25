@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.thc.bestpig.test.MainActivity">
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingTop="26dp"
+        android:paddingLeft="24dp"
+        android:paddingRight="24dp">
+
+        <ImageView
+            android:layout_width="101dp"
+            android:layout_height="112dp"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginBottom="24dp"
+            android:cropToPadding="true"
+            android:src="@mipmap/ic_launcher_round" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:lineSpacingExtra="8sp"
+            android:text="Toulouse Hacking Convention"
+            android:textAlignment="center"
+            android:textSize="30sp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:paddingTop="36dp"
+            android:id="@+id/serialLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Serial:" />
+
+        <EditText
+            android:id="@+id/serialInput"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="ABCD-1234-EFGH-5678"
+            android:maxLength="19"
+            android:digits="ABCDEFGHIJKLMNOPQRSTUVWXYZ1234567890-"
+            android:imeOptions="actionSend"
+            android:inputType="textCapCharacters" />
+
+        <Button
+            android:id="@+id/buttonActivate"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Activate Software" />
+
+
+    </LinearLayout>
+
+</android.support.constraint.ConstraintLayout>
