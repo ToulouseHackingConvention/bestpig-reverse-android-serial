@@ -2,6 +2,7 @@ package com.thc.bestpig.serial;
 
 import android.annotation.TargetApi;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Build;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -14,6 +15,8 @@ import android.widget.EditText;
 public class MainActivity extends AppCompatActivity {
 
     protected boolean validateSerial(String serial) {
+        if (serial.length() != 19)
+            return false;
         if (serial.charAt(4) != '-' || serial.charAt(9) != '-' || serial.charAt(14) != '-')
             return false;
         if ((int)serial.charAt(5) != (int) serial.charAt(6) + 1)
@@ -56,17 +59,20 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
-    protected void checkPassword(String serial) {
+    protected boolean checkPassword(String serial) {
         if (validateSerial(serial)) {
             new AlertDialog.Builder(MainActivity.this)
                     .setTitle("Well done ;)")
-                    .setMessage("You can now validate ths challenge.\n\nThe flag is the serial")
+                    .setMessage("You can now validate this challenge.\n\nThe flag is the serial")
                     .setCancelable(false)
                     .setNeutralButton("Ok", new DialogInterface.OnClickListener() {
                         @Override
                         public void onClick(DialogInterface dialog, int which) {
+                            Intent intent = new Intent(getApplicationContext(), PremiumActivity.class);
+                            startActivity(intent);
                         }
                     }).show();
+            return true;
         }
         else {
             new AlertDialog.Builder(MainActivity.this)
@@ -78,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
                         public void onClick(DialogInterface dialog, int which) {
                         }
                     }).show();
+            return false;
         }
     }
 
@@ -87,6 +94,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
         getSupportActionBar().setDisplayShowHomeEnabled(true);
         getSupportActionBar().setLogo(R.mipmap.ic_launcher);
         getSupportActionBar().setDisplayUseLogoEnabled(true);
@@ -94,15 +102,15 @@ public class MainActivity extends AppCompatActivity {
         final EditText editText = findViewById(R.id.serialInput);
 
         editText.setFilters(new InputFilter[] {
-                new InputFilter.AllCaps(),
-                new InputFilter.LengthFilter(19)
+            new InputFilter.AllCaps(),
+            new InputFilter.LengthFilter(19)
         });
 
         Button clickButton = findViewById(R.id.buttonActivate);
         clickButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                checkPassword(editText.getText().toString());
+            checkPassword(editText.getText().toString());
             }
         });
     }
